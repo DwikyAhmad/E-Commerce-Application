@@ -1,0 +1,182 @@
+[
+    {
+        "productName": "Wireless Bluetooth Headphones",
+        "image": "https://example.com/images/headphones.jpg",
+        "description": "High-quality wireless headphones with noise cancellation.",
+        "quantity": 150,
+        "price": 99.99,
+        "discount": 10,
+        "specialPrice": 89.99
+    },
+    {
+        "productName": "Men's Running Shoes",
+        "image": "https://example.com/images/running_shoes.jpg",
+        "description": "Lightweight and comfortable running shoes for men.",
+        "quantity": 200,
+        "price": 79.99,
+        "discount": 15,
+        "specialPrice": 67.99
+    },
+    {
+        "productName": "Smartwatch with Heart Rate Monitor",
+        "image": "https://example.com/images/smartwatch.jpg",
+        "description": "Stylish smartwatch with fitness tracking features.",
+        "quantity": 120,
+        "price": 149.99,
+        "discount": 20,
+        "specialPrice": 129.99
+    },
+    {
+        "productName": "Portable Charger 20000mAh",
+        "image": "https://example.com/images/portable_charger.jpg",
+        "description": "High-capacity portable charger for all your devices.",
+        "quantity": 300,
+        "price": 39.99,
+        "discount": 5,
+        "specialPrice": 34.99
+    },
+    {
+        "productName": "Stainless Steel Water Bottle",
+        "image": "https://example.com/images/water_bottle.jpg",
+        "description": "Durable and insulated water bottle for outdoor activities.",
+        "quantity": 250,
+        "price": 25.99,
+        "discount": 10,
+        "specialPrice": 23.99
+    },
+    {
+        "productName": "Wireless Earbuds",
+        "image": "https://example.com/images/earbuds.jpg",
+        "description": "Compact and lightweight wireless earbuds with great sound quality.",
+        "quantity": 180,
+        "price": 59.99,
+        "discount": 15,
+        "specialPrice": 50.99
+    },
+    {
+        "productName": "Yoga Mat",
+        "image": "https://example.com/images/yoga_mat.jpg",
+        "description": "Non-slip yoga mat for all types of workouts.",
+        "quantity": 220,
+        "price": 29.99,
+        "discount": 10,
+        "specialPrice": 26.99
+    },
+    {
+        "productName": "Bluetooth Speaker",
+        "image": "https://example.com/images/bluetooth_speaker.jpg",
+        "description": "Portable Bluetooth speaker with powerful sound.",
+        "quantity": 160,
+        "price": 49.99,
+        "discount": 10,
+        "specialPrice": 44.99
+    },
+    {
+        "productName": "4K Ultra HD Smart TV",
+        "image": "https://example.com/images/smart_tv.jpg",
+        "description": "Experience stunning picture quality with this 4K Smart TV.",
+        "quantity": 80,
+        "price": 599.99,
+        "discount": 100,
+        "specialPrice": 499.99
+    },
+    {
+        "productName": "Gaming Mouse",
+        "image": "https://example.com/images/gaming_mouse.jpg",
+        "description": "High-precision gaming mouse with customizable buttons.",
+        "quantity": 140,
+        "price": 39.99,
+        "discount": 5,
+        "specialPrice": 34.99
+    },
+    {
+        "productName": "Electric Kettle",
+        "image": "https://example.com/images/electric_kettle.jpg",
+        "description": "Fast boiling electric kettle with auto shut-off feature.",
+        "quantity": 90,
+        "price": 39.99,
+        "discount": 10,
+        "specialPrice": 35.99
+    },
+    {
+        "productName": "Leather Wallet",
+        "image": "https://example.com/images/leather_wallet.jpg",
+        "description": "Stylish leather wallet with multiple card slots.",
+        "quantity": 300,
+        "price": 29.99,
+        "discount": 5,
+        "specialPrice": 26.99
+    },
+    {
+        "productName": "Fitness Tracker",
+        "image": "https://example.com/images/fitness_tracker.jpg",
+        "description": "Monitor your fitness goals with this advanced fitness tracker.",
+        "quantity": 110,
+        "price": 69.99,
+        "discount": 10,
+        "specialPrice": 62.99
+    },
+    {
+        "productName": "Non-Stick Cookware Set",
+        "image": "https://example.com/images/cookware_set.jpg",
+        "description": "Durable non-stick cookware set for easy cooking.",
+        "quantity": 75,
+        "price": 99.99,
+        "discount": 20,
+        "specialPrice": 79.99
+    },
+    {
+        "productName": "Wireless Charging Pad",
+        "image": "https://example.com/images/wireless_charger.jpg",
+        "description": "Fast wireless charging pad compatible with most devices.",
+        "quantity": 200,
+        "price": 19.99,
+        "discount": 5,
+        "specialPrice": 17.99
+    },
+    {
+        "productName": "Men's Casual Shirt",
+        "image": "https://example.com/images/casual_shirt.jpg",
+        "description": "Comfortable and stylish casual shirt for everyday wear.",
+        "quantity": 150,
+        "price": 29.99,
+        "discount": 10,
+        "specialPrice": 26.99
+    },
+    {
+        "productName": "Wireless Security Camera",
+        "image": "https://example.com/images/security_camera.jpg",
+        "description": "Keep your home safe with this wireless security camera.",
+        "quantity": 60,
+        "price": 89.99,
+        "discount": 15,
+        "specialPrice": 76.99
+    },
+    {
+        "productName": "Portable Bluetooth Keyboard",
+        "image": "https://example.com/images/bluetooth_keyboard.jpg",
+        "description": "Compact and lightweight Bluetooth keyboard for easy typing.",
+        "quantity": 130,
+        "price": 39.99,
+        "discount": 10,
+        "specialPrice": 35.99
+    },
+    {
+        "productName": "Smart LED Light Bulbs",
+        "image": "https://example.com/images/smart_bulbs.jpg",
+        "description": "Control your lighting with these smart LED bulbs.",
+        "quantity": 250,
+        "price": 19.99,
+        "discount": 5,
+        "specialPrice": 17.99
+    },
+    {
+        "productName": "Travel Backpack",
+        "image": "https://example.com/images/travel_backpack.jpg",
+        "description": "Durable and spacious travel backpack for all your adventures.",
+        "quantity": 100,
+        "price": 49.99,
+        "discount": 10,
+        "specialPrice": 44.99
+    }
+]
