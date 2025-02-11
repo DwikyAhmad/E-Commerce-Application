@@ -94,8 +94,37 @@
 		{
 			"name": "Delete Product",
 			"request": {
-				"method": "GET",
-				"header": []
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIERldGFpbHMiLCJpc3MiOiJFdmVudCBTY2hlZHVsZXIiLCJpYXQiOjE3MzkyNDU0NzIsImVtYWlsIjoiamFuZS5zbWl0aEBleGFtcGxlLmNvbSJ9.f3KvzFdj3dsykvtrLa6ilR6lvSOammKUYkll_zgn5OQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/admin/products/:productId",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"products",
+						":productId"
+					],
+					"variable": [
+						{
+							"key": "productId",
+							"value": ""
+						}
+					]
+				}
 			},
 			"response": []
 		},

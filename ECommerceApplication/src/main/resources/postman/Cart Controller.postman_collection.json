@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "37de5358-65d9-4bb0-8b66-b36e0b4f1fb8",
+		"name": "Cart Controller",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28364574"
+	},
+	"item": [
+		{
+			"name": "Get Carts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIERldGFpbHMiLCJpc3MiOiJFdmVudCBTY2hlZHVsZXIiLCJpYXQiOjE3MzkyNDU0NzIsImVtYWlsIjoiamFuZS5zbWl0aEBleGFtcGxlLmNvbSJ9.f3KvzFdj3dsykvtrLa6ilR6lvSOammKUYkll_zgn5OQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/admin/carts",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Item From Cart",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/public/carts/:cartId/product/:productId",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"public",
+						"carts",
+						":cartId",
+						"product",
+						":productId"
+					],
+					"variable": [
+						{
+							"key": "cartId",
+							"value": ""
+						},
+						{
+							"key": "productId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product Qty on Cart",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/public/carts/:cartId/product/:productId/quantity/:quantity",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"public",
+						"carts",
+						":cartId",
+						"product",
+						":productId",
+						"quantity",
+						":quantity"
+					],
+					"variable": [
+						{
+							"key": "cartId",
+							"value": ""
+						},
+						{
+							"key": "productId",
+							"value": ""
+						},
+						{
+							"key": "quantity",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product to Cart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/public/carts/:cartId/product/:productId/quantity/:quantity",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"public",
+						"carts",
+						":cartId",
+						"product",
+						":productId",
+						"quantity",
+						":quantity"
+					],
+					"variable": [
+						{
+							"key": "cartId",
+							"value": ""
+						},
+						{
+							"key": "productId",
+							"value": ""
+						},
+						{
+							"key": "quantity",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Cart By Email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/public/users/:email/carts/:cartId",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"public",
+						"users",
+						":email",
+						"carts",
+						":cartId"
+					],
+					"variable": [
+						{
+							"key": "email",
+							"value": ""
+						},
+						{
+							"key": "cartId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

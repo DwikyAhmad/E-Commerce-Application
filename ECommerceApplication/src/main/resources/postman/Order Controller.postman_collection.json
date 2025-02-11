@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "c009fdb4-c126-4d3b-8cae-e887c06db7a8",
+		"name": "Order Controller",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28364574"
+	},
+	"item": [
+		{
+			"name": "Get All Order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIERldGFpbHMiLCJpc3MiOiJFdmVudCBTY2hlZHVsZXIiLCJpYXQiOjE3MzkyNDU0NzIsImVtYWlsIjoiamFuZS5zbWl0aEBleGFtcGxlLmNvbSJ9.f3KvzFdj3dsykvtrLa6ilR6lvSOammKUYkll_zgn5OQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/admin/orders?pageNumber=0&pageSize=2&sortBy=totalAmount&sortOrder=asc",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						},
+						{
+							"key": "sortBy",
+							"value": "totalAmount"
+						},
+						{
+							"key": "sortOrder",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIERldGFpbHMiLCJpc3MiOiJFdmVudCBTY2hlZHVsZXIiLCJpYXQiOjE3MzkyNDU0NzIsImVtYWlsIjoiamFuZS5zbWl0aEBleGFtcGxlLmNvbSJ9.f3KvzFdj3dsykvtrLa6ilR6lvSOammKUYkll_zgn5OQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"string\",\r\n  \"orderItems\": [\r\n    {\r\n      \"product\": {\r\n        \"productId\": 0,\r\n        \"productName\": \"string\",\r\n        \"image\": \"string\",\r\n        \"description\": \"string\",\r\n        \"quantity\": 0,\r\n        \"price\": 0,\r\n        \"discount\": 0,\r\n        \"specialPrice\": 0\r\n      },\r\n      \"quantity\": 0,\r\n      \"discount\": 0,\r\n      \"orderedProductPrice\": 0\r\n    }\r\n  ],\r\n  \"payment\": {\r\n    \"paymentMethod\": \"string\"\r\n  },\r\n  \"totalAmount\": 0,\r\n  \"orderStatus\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/admin/users/:email/orders/:orderId/orderStatus/:orderStatus",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"users",
+						":email",
+						"orders",
+						":orderId",
+						"orderStatus",
+						":orderStatus"
+					],
+					"variable": [
+						{
+							"key": "email",
+							"value": ""
+						},
+						{
+							"key": "orderId",
+							"value": ""
+						},
+						{
+							"key": "orderStatus",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"string\",\r\n  \"orderItems\": [\r\n    {\r\n      \"product\": {\r\n        \"productId\": 0,\r\n        \"productName\": \"string\",\r\n        \"image\": \"string\",\r\n        \"description\": \"string\",\r\n        \"quantity\": 0,\r\n        \"price\": 0,\r\n        \"discount\": 0,\r\n        \"specialPrice\": 0\r\n      },\r\n      \"quantity\": 0,\r\n      \"discount\": 0,\r\n      \"orderedProductPrice\": 0\r\n    }\r\n  ],\r\n  \"payment\": {\r\n    \"paymentMethod\": \"string\"\r\n  },\r\n  \"totalAmount\": 0,\r\n  \"orderStatus\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/public/users/:email/carts/:cartId/payments/:paymentMethod/order",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"public",
+						"users",
+						":email",
+						"carts",
+						":cartId",
+						"payments",
+						":paymentMethod",
+						"order"
+					],
+					"variable": [
+						{
+							"key": "email",
+							"value": ""
+						},
+						{
+							"key": "cartId",
+							"value": ""
+						},
+						{
+							"key": "paymentMethod",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order by Email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/public/users/:email/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"public",
+						"users",
+						":email",
+						"orders"
+					],
+					"variable": [
+						{
+							"key": "email",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order by Email and OrderId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/public/users/:email/orders/:orderId",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"public",
+						"users",
+						":email",
+						"orders",
+						":orderId"
+					],
+					"variable": [
+						{
+							"key": "email",
+							"value": ""
+						},
+						{
+							"key": "orderId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
