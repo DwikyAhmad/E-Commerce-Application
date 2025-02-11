@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "0b29c191-a716-468a-a420-75c44959d610",
+		"name": "Auth Controller",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28364574"
+	},
+	"item": [
+		{
+			"name": "Login user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"jane.smith@example.com\",\r\n    \"password\": \"securepass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Jennifer\",\r\n    \"lastName\": \"Smith\",\r\n    \"mobileNumber\": \"0987654321\",\r\n    \"email\": \"jane.smith@example.com\",\r\n    \"password\": \"securepass\",\r\n    \"roles\": [\r\n      {\r\n        \"roleId\": 102,\r\n        \"roleName\": \"ADMIN\"\r\n      }\r\n    ],\r\n    \"address\": {\r\n      \"street\": \"456 Oak St\",\r\n      \"buildingName\": \"Suite 200\",\r\n      \"city\": \"Metropolis\",\r\n      \"state\": \"NY\",\r\n      \"country\": \"USA\",\r\n      \"pincode\": \"100010\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "3cf8842c-f853-4e61-b381-e0c9b78e9c1f",
+		"name": "User Controller",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28364574"
+	},
+	"item": [
+		{
+			"name": "Get user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIERldGFpbHMiLCJpc3MiOiJFdmVudCBTY2hlZHVsZXIiLCJpYXQiOjE3MzkyNDU0NzIsImVtYWlsIjoiamFuZS5zbWl0aEBleGFtcGxlLmNvbSJ9.f3KvzFdj3dsykvtrLa6ilR6lvSOammKUYkll_zgn5OQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/admin/users?pageNumber=0&pageSize=2&sortBy=userId&sortOrder=asc",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"users"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						},
+						{
+							"key": "sortBy",
+							"value": "userId"
+						},
+						{
+							"key": "sortOrder",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIERldGFpbHMiLCJpc3MiOiJFdmVudCBTY2hlZHVsZXIiLCJpYXQiOjE3MzkyNDU0NzIsImVtYWlsIjoiamFuZS5zbWl0aEBleGFtcGxlLmNvbSJ9.f3KvzFdj3dsykvtrLa6ilR6lvSOammKUYkll_zgn5OQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/admin/users/{userId}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"users",
+						"{userId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/public/users/:userId",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"public",
+						"users",
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user by id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Jennifer\",\r\n    \"lastName\": \"Smith\",\r\n    \"mobileNumber\": \"0987654321\",\r\n    \"email\": \"jane.smith@example.com\",\r\n    \"password\": \"securepass\",\r\n    \"roles\": [\r\n      {\r\n        \"roleId\": 102,\r\n        \"roleName\": \"ADMIN\"\r\n      }\r\n    ],\r\n    \"address\": {\r\n      \"street\": \"456 Oak St\",\r\n      \"buildingName\": \"Suite 200\",\r\n      \"city\": \"Metropolis\",\r\n      \"state\": \"NY\",\r\n      \"country\": \"USA\",\r\n      \"pincode\": \"100010\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/public/users/:userId",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"public",
+						"users",
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
