@@ -7,7 +7,7 @@
     "password": "securepass",
     "roles": [
       {
-        "roleId": 102,
+        "roleId": 101,
         "roleName": "ADMIN"
       }
     ],
