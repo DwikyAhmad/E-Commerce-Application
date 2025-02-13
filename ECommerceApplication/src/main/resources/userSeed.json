@@ -3,14 +3,8 @@
     "firstName": "Jennifer",
     "lastName": "Smith",
     "mobileNumber": "0987654321",
-    "email": "jane.smith@example.com",
-    "password": "securepass",
-    "roles": [
-      {
-        "roleId": 101,
-        "roleName": "ADMIN"
-      }
-    ],
+    "email": "admin@gmail.com",
+    "password": "admin123",
     "address": {
       "street": "456 Oak St",
       "buildingName": "Suite 200",

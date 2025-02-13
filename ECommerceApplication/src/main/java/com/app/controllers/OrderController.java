@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.config.AppConstants;
 import com.app.payloads.OrderDTO;
 import com.app.payloads.OrderResponse;
+import com.app.payloads.ResponseDTO;
 import com.app.services.OrderService;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -29,7 +30,44 @@ public class OrderController {
 	public OrderService orderService;
 	
 	@PostMapping("/public/users/{email}/carts/{cartId}/payments/{paymentMethod}/order")
-	public ResponseEntity<OrderDTO> orderProducts(@PathVariable String email, @PathVariable Long cartId, @PathVariable String paymentMethod) {
+	public ResponseEntity<?> orderProducts(@PathVariable String email, @PathVariable Long cartId,
+			@PathVariable String paymentMethod, @RequestParam(name = "bankName", required = false) String bankName) {
+		
+		if (paymentMethod.toLowerCase().equals("transferbank")) {
+			int mandiri = 1234567890;
+			int bca = 1235564662;
+			int bri = 1343655775;
+
+			if (bankName == null) {
+				String responseMsg = "Bank name is required for bank transfer payment method, Bank available: Mandiri, BCA, BRI";
+				ResponseDTO response = new ResponseDTO(responseMsg, null, HttpStatus.BAD_REQUEST.value());
+				return new ResponseEntity<ResponseDTO>(response, HttpStatus.BAD_REQUEST);
+
+			} else {
+				Boolean isBankMandiri = bankName.toLowerCase().equals("mandiri");
+				Boolean isBankBCA = bankName.toLowerCase().equals("bca");
+				Boolean isBankBRI = bankName.toLowerCase().equals("bri");
+				String responseMsg;
+
+				if (isBankMandiri) {
+					responseMsg = "Please transfer to this Mandiri account number: " + mandiri;
+				} else if (isBankBCA) {
+					responseMsg = "Please transfer to this BCA account number: " + bca;
+				} else if (isBankBRI) {
+					responseMsg = "Please transfer to this BRI account number: " + bri;
+				} else {
+					responseMsg = "Bank " + bankName + " is not available, Bank available: Mandiri, BCA, BRI";
+					ResponseDTO response = new ResponseDTO(responseMsg, null, HttpStatus.BAD_REQUEST.value());
+					return new ResponseEntity<ResponseDTO>(response, HttpStatus.BAD_REQUEST);
+				}
+				
+				OrderDTO order = orderService.placeOrder(email, cartId, paymentMethod);
+				ResponseDTO response = new ResponseDTO(responseMsg, order, HttpStatus.CREATED.value());
+
+				return new ResponseEntity<ResponseDTO>(response, HttpStatus.OK);
+			}
+		}
+		
 		OrderDTO order = orderService.placeOrder(email, cartId, paymentMethod);
 		
 		return new ResponseEntity<OrderDTO>(order, HttpStatus.CREATED);
