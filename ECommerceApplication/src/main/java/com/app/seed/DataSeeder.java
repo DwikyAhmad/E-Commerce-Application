@@ -5,6 +5,7 @@ import java.util.Random;
 
 import com.app.repositories.RoleRepo;
 import com.app.services.CategoryService;
+import com.app.services.CouponService;
 import com.app.services.OrderService;
 import com.app.services.ProductService;
 import com.app.services.UserService;
@@ -14,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.app.config.AppConstants;
+import com.app.entites.Brand;
 import com.app.entites.Category;
+import com.app.entites.Coupon;
 import com.app.entites.Role;
 import com.app.payloads.AddressDTO;
 import com.app.payloads.UserDTO;
@@ -23,6 +26,7 @@ import com.app.repositories.CategoryRepo;
 import com.app.repositories.UserRepo;
 import com.app.entites.User;
 import com.app.repositories.ProductRepo;
+import com.app.services.BrandService;
 import com.app.services.CartService;
 import org.springframework.stereotype.Service;
 
@@ -59,12 +63,20 @@ public class DataSeeder {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private CouponService couponService;
+
+    @Autowired
+    private BrandService brandService;
+
     private final Faker faker = new Faker();
 
     public void seedAll() {
         seedRole();
         seedUser();
         seedCategory();
+        seedCoupon();
+        seedBrand();
         seedProduct();
         seedCart();
         seedOrder();
@@ -147,8 +159,33 @@ public class DataSeeder {
         }
     }
 
+    public void seedCoupon() {
+        for (int i = 0; i < 20; i++) {
+            try {
+                String code = faker.code().ean8();
+                Double discountPercentage = faker.number().randomDouble(2, 0, 100);
+                
+                couponService.createCoupon(code, discountPercentage);
+            } catch (Exception e) {
+                // do nothing
+            }
+        }
+    }
+
+    public void seedBrand() {
+        for (int i = 0; i <= 10; i++) {
+            try {
+                brandService.createBrand(faker.company().name());
+            } catch (Exception e) {
+                // do nothing
+            }
+        }
+    }
+
     public void seedProduct() {
         List<Category> categories = categoryRepo.findAll();
+        List<Brand> brands = brandService.getAllBrands();
+        List<Coupon> coupons = couponService.getAllCoupons();
         for (int i = 0; i <= 30; i++) {
             try {
                 Product product = new Product();
@@ -163,6 +200,14 @@ public class DataSeeder {
                 int randomCategoryIndex = faker.random().nextInt(0, categories.size());
                 Category randomCategory = categories.get(randomCategoryIndex);
                 long index = randomCategory.getCategoryId();
+
+                int randomBrandIndex = faker.random().nextInt(0, brands.size());
+                Brand randomBrand = brands.get(randomBrandIndex);
+                product.setBrand(randomBrand);
+
+                int randomCouponIndex = faker.random().nextInt(0, coupons.size());
+                Coupon randomCoupon = coupons.get(randomCouponIndex);
+                product.setCoupon(randomCoupon);
 
                 productService.addProduct(index, product);
             } catch (Exception e) {
