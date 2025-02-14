@@ -100,6 +100,14 @@ public class BrandServiceImpl implements BrandService{
     }
 
     @Override
+    public List<Product> getBrandProducts(Long brandId) {
+        Brand brand = brandRepo.findByBrandId(brandId).orElseThrow(
+                () -> new ResourceNotFoundException("Brand", "brandId", brandId));
+
+        return brand.getProducts();
+    }
+
+    @Override
     public Brand deleteProductFromBrand(Long brandId, Product product) {
         Long productId = product.getProductId();
         product = productRepo.findById(productId).orElseThrow(

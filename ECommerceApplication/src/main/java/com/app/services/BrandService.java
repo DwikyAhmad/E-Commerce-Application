@@ -18,5 +18,7 @@ public interface BrandService {
 
     Brand addProductToBrand(Long brandId, Product product);
 
+    List<Product> getBrandProducts(Long brandId);
+
     Brand deleteProductFromBrand(Long brandId, Product product);
 }
