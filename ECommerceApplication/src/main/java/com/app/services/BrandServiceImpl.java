@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -25,6 +26,10 @@ public class BrandServiceImpl implements BrandService{
         if (brandRepo.findByBrandId(brandId).isPresent()) {
             throw new APIException("Brand already exists with brandId: " + brandId + " !!!");
         }
+        if (products != null) {
+            products = new ArrayList<>();
+        }
+
         Brand brand = new Brand(brandId, brandName, products);
 
         return brandRepo.save(brand);
