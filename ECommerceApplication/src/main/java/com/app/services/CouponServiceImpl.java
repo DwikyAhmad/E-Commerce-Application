@@ -22,15 +22,17 @@ public class CouponServiceImpl implements CouponService{
     private ProductRepo productRepo;
 
     @Override
-    public Coupon createCoupon(Long couponId, String couponName, double discountPercentage, List<Product> products) {
-        if (couponRepo.findByCouponId(couponId).isPresent()) {
-            throw new APIException("Coupon already exists with couponId: " + couponId + " !!!");
-        }
-        if (products != null) {
-            products = new ArrayList<>();
+    public Coupon createCoupon(String couponName, double discountPercentage) {
+        if (couponRepo.findByCode(couponName).isPresent()) {
+            throw new APIException("Coupon already exists with coupon code: " + couponName + " !!!");
         }
 
-        Coupon coupon = new Coupon(couponId, couponName, discountPercentage, products);
+        List<Product> products = new ArrayList<>();
+    
+        Coupon coupon = new Coupon();
+        coupon.setCode(couponName);
+        coupon.setDiscountPercentage(discountPercentage);
+        coupon.setProducts(products);
 
         return couponRepo.save(coupon);
     }

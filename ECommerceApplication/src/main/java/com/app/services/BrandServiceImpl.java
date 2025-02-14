@@ -22,15 +22,15 @@ public class BrandServiceImpl implements BrandService{
     private ProductRepo productRepo;
 
     @Override
-    public Brand createBrand(Long brandId, String brandName, List<Product> products) {
-        if (brandRepo.findByBrandId(brandId).isPresent()) {
-            throw new APIException("Brand already exists with brandId: " + brandId + " !!!");
+    public Brand createBrand(String brandName) {
+        if (brandRepo.findByBrandName(brandName).isPresent()) {
+            throw new APIException("Brand already exists with name " + brandName);
         }
-        if (products != null) {
-            products = new ArrayList<>();
-        }
-
-        Brand brand = new Brand(brandId, brandName, products);
+        
+        Brand brand = new Brand();
+        List<Product> products = new ArrayList<>();
+        brand.setBrandName(brandName);
+        brand.setProducts(products);
 
         return brandRepo.save(brand);
     }

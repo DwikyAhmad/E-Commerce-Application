@@ -6,7 +6,7 @@ import com.app.entites.Product;
 import java.util.List;
 
 public interface BrandService {
-    Brand createBrand(Long brandId, String brandName, List<Product> products);
+    Brand createBrand(String brandName);
 
     Brand getBrand(Long brandId);
 

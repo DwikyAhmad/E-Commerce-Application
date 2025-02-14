@@ -7,7 +7,7 @@ import com.app.entites.Product;
 import java.util.List;
 
 public interface CouponService {
-    Coupon createCoupon(Long couponId, String couponName, double discountPercentage, List<Product> products);
+    Coupon createCoupon(String couponName, double discountPercentage);
 
     Coupon getCoupon(Long couponId);
 
