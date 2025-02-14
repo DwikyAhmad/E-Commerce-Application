@@ -56,7 +56,7 @@ public class CouponController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
-    @PutMapping("path/{id}")
+    @PutMapping("/public/coupon/{id}")
     public ResponseEntity<?> putMethodName(@PathVariable Long id, @RequestBody CouponDTO couponDTO) {
         Coupon coupon = couponService.getCoupon(id);
         coupon.setCode(couponDTO.getCode());
