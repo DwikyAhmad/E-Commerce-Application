@@ -68,9 +68,11 @@ public class OrderController {
 			}
 		}
 		
-		OrderDTO order = orderService.placeOrder(email, cartId, paymentMethod);
+		String message = "Payment method " + paymentMethod
+				+ " is not available, Payment method available: TransferBank";
+		ResponseDTO response = new ResponseDTO(message, null, HttpStatus.BAD_REQUEST.value());
 		
-		return new ResponseEntity<OrderDTO>(order, HttpStatus.CREATED);
+		return new ResponseEntity<ResponseDTO>(response, HttpStatus.BAD_REQUEST);
 	}
 
 	@GetMapping("/admin/orders")
