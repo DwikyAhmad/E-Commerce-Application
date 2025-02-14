@@ -1,6 +1,7 @@
 package com.app.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import com.app.config.AppConstants;
 import com.app.entites.Product;
 import com.app.payloads.ProductDTO;
 import com.app.payloads.ProductResponse;
+import com.app.payloads.ResponseDTO;
 import com.app.services.ProductService;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -100,5 +102,23 @@ public class ProductController {
 
 		return new ResponseEntity<String>(status, HttpStatus.OK);
 	}
+
+	@GetMapping("/public/brand/{brandId}/products")
+	public ResponseEntity<?> getProductsByBrand(@PathVariable Long brandId) {
+		List<ProductDTO> products = productService.getProductByBrand(brandId);
+		ResponseDTO response = new ResponseDTO("Products fetched successfully", products, 200);
+
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+	@GetMapping("/public/coupon/{couponId}/products")
+	public ResponseEntity<?> getProductsByCoupon(@PathVariable Long couponId) {
+		List<ProductDTO> products = productService.getProductByCoupon(couponId);
+		ResponseDTO response = new ResponseDTO("Products fetched successfully", products, 200);
+
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+	
+	
 
 }

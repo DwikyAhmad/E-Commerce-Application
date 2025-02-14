@@ -1,6 +1,7 @@
 package com.app.services;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,5 +26,9 @@ public interface ProductService {
 			String sortOrder);
 
 	String deleteProduct(Long productId);
+
+	List<ProductDTO> getProductByBrand(Long brandId);
+
+	List<ProductDTO> getProductByCoupon(Long couponId);
 
 }

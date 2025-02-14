@@ -14,8 +14,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.app.entites.Brand;
 import com.app.entites.Cart;
 import com.app.entites.Category;
+import com.app.entites.Coupon;
 import com.app.entites.Product;
 import com.app.exceptions.APIException;
 import com.app.exceptions.ResourceNotFoundException;
@@ -49,6 +51,12 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ModelMapper modelMapper;
+
+	@Autowired
+	private BrandService brandService;
+
+	@Autowired
+	private CouponService couponService;
 
 	@Value("${project.image}")
 	private String path;
@@ -151,7 +159,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ProductResponse searchProductByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
+	public ProductResponse searchProductByKeyword(String keyword, Integer pageNumber, Integer pageSize, String sortBy,
+			String sortOrder) {
 		Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
 				: Sort.by(sortBy).descending();
 
@@ -160,7 +169,7 @@ public class ProductServiceImpl implements ProductService {
 		Page<Product> pageProducts = productRepo.findByProductNameLike("%" + keyword + "%", pageDetails);
 
 		List<Product> products = pageProducts.getContent();
-		
+
 		if (products.size() == 0) {
 			throw new APIException("Products not found with keyword: " + keyword);
 		}
@@ -225,17 +234,15 @@ public class ProductServiceImpl implements ProductService {
 		if (productFromDB == null) {
 			throw new APIException("Product not found with productId: " + productId);
 		}
-		
+
 		String fileName = fileService.uploadImage(path, image);
-		
+
 		productFromDB.setImage(fileName);
-		
+
 		Product updatedProduct = productRepo.save(productFromDB);
-		
+
 		return modelMapper.map(updatedProduct, ProductDTO.class);
 	}
-
-
 
 	@Override
 	public String deleteProduct(Long productId) {
@@ -250,6 +257,32 @@ public class ProductServiceImpl implements ProductService {
 		productRepo.delete(product);
 
 		return "Product with productId: " + productId + " deleted successfully !!!";
+	}
+
+	@Override
+	public List<ProductDTO> getProductByBrand(Long brandId) {
+		Brand brand = brandService.getBrand(brandId);
+		List<Product> products = productRepo.findByBrand(brand);
+		if (products == null) {
+			throw new APIException("No products found with brandId: " + brandId);
+		}
+
+		return products.stream().map(product -> modelMapper.map(product, ProductDTO.class))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<ProductDTO> getProductByCoupon(Long couponId) {
+		Coupon coupon = couponService.getCoupon(couponId);
+
+		List<Product> products = productRepo.findByCoupon(coupon);
+
+		if (products == null) {
+			throw new APIException("No products found with couponId: " + couponId);
+		}
+
+		return products.stream().map(product -> modelMapper.map(product, ProductDTO.class))
+				.collect(Collectors.toList());
 	}
 
 }
