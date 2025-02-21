@@ -21,9 +21,6 @@ import com.app.services.CartService;
 import com.app.payloads.CartDTO;
 import com.app.payloads.ProductDTO;
 import com.app.payloads.ResponseDTO;
-import com.app.entites.Wishlist;
-import com.app.entites.User;
-import com.app.services.UserService;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
@@ -37,10 +34,6 @@ public class WishlistController {
 
     @Autowired
     private CartService cartService;
-
-    @Autowired
-    private UserService userService;
-
 
     // Add a product to a user's wishlist. Note that wishlist items don't require quantity.
     @PostMapping("/public/wishlists/{wishlistId}/products/{productId}")
@@ -83,7 +76,6 @@ public class WishlistController {
     public ResponseEntity<?> addWishlistItemsToCart(@PathVariable String email, @PathVariable Long wishlistId) {
         List<ProductDTO> products = wishlistService.getWishlist(wishlistId).getProducts();
 
-
         for (ProductDTO product : products) {
             cartService.addProductToCart(wishlistId, product.getProductId(), 1);
             wishlistService.deleteProductFromWishlist(wishlistId, product.getProductId());
@@ -92,6 +84,20 @@ public class WishlistController {
         CartDTO cart = cartService.getCart(email, wishlistId);
 
         String message = "All items from wishlist moved to cart";
+        ResponseDTO response = new ResponseDTO(message, cart, 200);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    
+    // Add specific item from wishlist to cart and clear the wishlist
+    @PostMapping("/public/{email}/wishlists/{wishlistId}/products/{productId}/moveToCart")
+    public ResponseEntity<?> addWishlistItemToCart(@PathVariable String email, @PathVariable Long wishlistId, @PathVariable Long productId) {
+        cartService.addProductToCart(wishlistId, productId, 1);
+        wishlistService.deleteProductFromWishlist(wishlistId, productId);
+
+        CartDTO cart = cartService.getCart(email, wishlistId);
+
+        String message = "Item moved to cart";
         ResponseDTO response = new ResponseDTO(message, cart, 200);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
