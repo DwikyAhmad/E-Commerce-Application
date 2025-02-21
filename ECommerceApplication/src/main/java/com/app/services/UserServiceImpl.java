@@ -19,6 +19,7 @@ import com.app.entites.Cart;
 import com.app.entites.CartItem;
 import com.app.entites.Role;
 import com.app.entites.User;
+import com.app.entites.Wishlist;
 import com.app.exceptions.APIException;
 import com.app.exceptions.ResourceNotFoundException;
 import com.app.payloads.AddressDTO;
@@ -61,6 +62,10 @@ public class UserServiceImpl implements UserService {
 			User user = modelMapper.map(userDTO, User.class);
 
 			Cart cart = new Cart();
+			Wishlist wishlist = new Wishlist();
+
+			user.setWishlist(wishlist);
+			wishlist.setUser(user);
 			user.setCart(cart);
 			cart.setUser(user);
 

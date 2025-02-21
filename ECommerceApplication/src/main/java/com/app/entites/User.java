@@ -63,5 +63,7 @@ public class User {
 
 	@OneToOne(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
 	private Cart cart;
-
+	
+	@OneToOne(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
+	private Wishlist wishlist;
 }
