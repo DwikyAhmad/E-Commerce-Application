@@ -28,6 +28,7 @@ import com.app.entites.User;
 import com.app.repositories.ProductRepo;
 import com.app.services.BrandService;
 import com.app.services.CartService;
+import com.app.services.WishlistService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -56,7 +57,7 @@ public class DataSeeder {
 
     @Autowired
     private ProductRepo productRepo;
-
+    
     @Autowired
     private CartService cartService;
 
@@ -68,6 +69,9 @@ public class DataSeeder {
 
     @Autowired
     private BrandService brandService;
+
+    @Autowired
+    private WishlistService wishlistService;
 
     private final Faker faker = new Faker();
 
@@ -251,5 +255,19 @@ public class DataSeeder {
             }
         }
         
+    }
+
+    public void seedWishlistData() {
+        List<User> users = userRepo.findAll();
+        List<Product> products = productRepo.findAll();
+        Random random = new Random();
+
+        if (!users.isEmpty() && !products.isEmpty()) {
+            for (int i = 0; i < 10; i++) { // Seed 10 wishlist entries
+                User user = users.get(random.nextInt(users.size()));
+                Product product = products.get(random.nextInt(products.size()));
+                wishlistService.addToWishlist(user, product);
+            }
+        }
     }
 }
