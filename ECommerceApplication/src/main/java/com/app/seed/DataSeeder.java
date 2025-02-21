@@ -9,6 +9,7 @@ import com.app.services.CouponService;
 import com.app.services.OrderService;
 import com.app.services.ProductService;
 import com.app.services.UserService;
+import com.app.services.WishlistService;
 import com.github.javafaker.Faker;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +25,12 @@ import com.app.payloads.UserDTO;
 import com.app.entites.Product;
 import com.app.repositories.CategoryRepo;
 import com.app.repositories.UserRepo;
+import com.app.repositories.WishlistRepo;
 import com.app.entites.User;
+import com.app.entites.Wishlist;
 import com.app.repositories.ProductRepo;
 import com.app.services.BrandService;
 import com.app.services.CartService;
-import com.app.services.WishlistService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -59,6 +61,9 @@ public class DataSeeder {
     private ProductRepo productRepo;
     
     @Autowired
+    private WishlistRepo wishlistRepo;
+
+    @Autowired
     private CartService cartService;
 
     @Autowired
@@ -84,6 +89,7 @@ public class DataSeeder {
         seedProduct();
         seedCart();
         seedOrder();
+        seedWishlist();
     }
 
     public void seedRole() {
@@ -257,17 +263,23 @@ public class DataSeeder {
         
     }
 
-    public void seedWishlistData() {
+    public void seedWishlist() {
         List<User> users = userRepo.findAll();
         List<Product> products = productRepo.findAll();
-        Random random = new Random();
 
-        if (!users.isEmpty() && !products.isEmpty()) {
-            for (int i = 0; i < 10; i++) { // Seed 10 wishlist entries
-                User user = users.get(random.nextInt(users.size()));
-                Product product = products.get(random.nextInt(products.size()));
-                wishlistService.addToWishlist(user, product);
+        for (User user : users) {
+            // Retrieve the wishlist for the user using the repository method
+            Wishlist wishlist = wishlistRepo.findByUserUserId(user.getUserId());
+            for (int i = 0; i <= 5; i++) {
+                try {
+                    wishlistService.addProductToWishlist(
+                        wishlist.getWishlistId(),
+                        products.get(i).getProductId()
+                    );
+                } catch (Exception e) {
+                    // do nothing
+                }
             }
         }
-    }
+    }   
 }

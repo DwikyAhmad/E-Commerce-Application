@@ -1,65 +1,63 @@
 package com.app.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.entites.Product;
-import com.app.entites.User;
-import com.app.entites.Wishlist;
+import com.app.payloads.WishlistDTO;
 import com.app.services.WishlistService;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
-import com.app.repositories.UserRepo;
-import com.app.repositories.ProductRepo;
-
 @RestController
 @RequestMapping("/api")
 @SecurityRequirement(name = "E-Commerce Application")
-class WishlistController {
+public class WishlistController {
+
     @Autowired
     private WishlistService wishlistService;
-        
-    @Autowired
-    private UserRepo userRepo;
-    
-    @Autowired
-    private ProductRepo productRepo;
 
-    @GetMapping("/public/wishlist/{userId}")
-    public List<Wishlist> getWishlist(@PathVariable Long userId) {
-        return wishlistService.getWishlistByUserId(userId);
+    // Add a product to a user's wishlist. Note that wishlist items don't require quantity.
+    @PostMapping("/public/wishlists/{wishlistId}/products/{productId}")
+    public ResponseEntity<WishlistDTO> addProductToWishlist(
+            @PathVariable Long wishlistId, 
+            @PathVariable Long productId) {
+        WishlistDTO wishlistDTO = wishlistService.addProductToWishlist(wishlistId, productId);
+        return new ResponseEntity<>(wishlistDTO, HttpStatus.CREATED);
     }
 
-    @PostMapping("/public/wishlist/add")
-    public void addToWishlist(
-        @RequestParam Long userId,
-        @RequestParam Long productId) {
-
-        Optional<User> user = userRepo.findById(userId);
-        Optional<Product> product = productRepo.findById(productId);
-        
-        if (user.isPresent() && product.isPresent()) {
-            wishlistService.addToWishlist(user.get(), product.get());
-        } else {
-            throw new RuntimeException("User or Product not found");
-        }
+    // Retrieve all wishlists (typically for admin use).
+    @GetMapping("/admin/wishlists")
+    public ResponseEntity<List<WishlistDTO>> getAllWishlists() {
+        List<WishlistDTO> wishlistDTOs = wishlistService.getAllWishlists();
+        return new ResponseEntity<>(wishlistDTOs, HttpStatus.OK);
     }
 
-    @DeleteMapping("/public/wishlist/remove")
-    public void removeFromWishlist(
-        @RequestParam Long userId,
-        @RequestParam Long productId) {
+    // Retrieve a specific user's wishlist.
+    // Note: Even though the path contains the user's email, the service only needs the wishlist ID,
+    // assuming one wishlist per user.
+    @GetMapping("/public/users/{email}/wishlists/{wishlistId}")
+    public ResponseEntity<WishlistDTO> getWishlistById(
+            @PathVariable String email, 
+            @PathVariable Long wishlistId) {
+        WishlistDTO wishlistDTO = wishlistService.getWishlist(wishlistId);
+        return new ResponseEntity<>(wishlistDTO, HttpStatus.OK);
+    }
 
-        wishlistService.removeFromWishlist(userId, productId);
+    // Remove a product from the wishlist.
+    @DeleteMapping("/public/wishlists/{wishlistId}/product/{productId}")
+    public ResponseEntity<String> deleteProductFromWishlist(
+            @PathVariable Long wishlistId, 
+            @PathVariable Long productId) {
+        String status = wishlistService.deleteProductFromWishlist(wishlistId, productId);
+        return new ResponseEntity<>(status, HttpStatus.OK);
     }
 }
